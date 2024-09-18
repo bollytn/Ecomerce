@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import useFetch from "../Hooks/useFetch"
+import './products.css'
 
 export default function products() {
     const [products, setProducts] = useState([])
@@ -9,17 +10,25 @@ export default function products() {
         data && setProducts(data)
         console.log(products);
     }, [data])
-    
+
     return (
-        <>
+        <div className="products">
             {loading
                 ? "loading... "
                 : products.map(product => (
                     <>
-                        <div key={product.id}>{product.attributes.Title}</div>
-                        <img src={import.meta.env.VITE_APP_URL + product.attributes.image.data.attributes.url} alt={product.title} />
+                        <div className="product" key={product.id}>
+                            <h2 className="product-title">{product.attributes.Title}</h2>
+                            <div className="product-price">{product.attributes.price}</div>
+                            <img
+                                className="product-image"
+                                src={import.meta.env.VITE_APP_URL + product.attributes.image.data.attributes.url}
+                                alt={product.title} />
+                            <div className="product-desc">{product.attributes.Desc}</div>
+                        </div>
+
                     </>
                 ))}
-        </>
+        </div>
     )
 }
