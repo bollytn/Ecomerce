@@ -9,7 +9,7 @@ export default function products() {
         data && setProducts(data)
         console.log(products);
     }, [data])
-
+    
     return (
         <>
             {loading
