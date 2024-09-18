@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import useFetch from "../Hooks/useFetch"
+import Checkbox from "./Checkbox"
 
 export default function Categories() {
     const [categories, setCategories] = useState([])
@@ -15,18 +16,9 @@ export default function Categories() {
             {loading
                 ? "loading... "
                 : categories.map(categorie => (
-                    <>
-                        <div className="categorie" key={categorie.id}>
-                            <h2 className="categorie-title">{categorie.attributes.Title}</h2>
-                            <div className="categorie-price">{categorie.attributes.price}</div>
-                            <img
-                                className="categorie-image"
-                                src={import.meta.env.VITE_APP_URL + categorie.attributes.image.data.attributes.url}
-                                alt={categorie.title} />
-                            <div className="categorie-desc">{categorie.attributes.desc}</div>
-                        </div>
-
-                    </>
+                    <Fragment key={categorie.id}>
+                        <Checkbox categorie={categorie} />
+                    </Fragment>
                 ))}
         </div>
     )

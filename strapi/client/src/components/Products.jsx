@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import useFetch from "../Hooks/useFetch"
 import './products.css'
 
@@ -16,8 +16,8 @@ export default function products() {
             {loading
                 ? "loading... "
                 : products.map(product => (
-                    <>
-                        <div className="product" key={product.id}>
+                    <Fragment key={product.id}> 
+                        <div className="product">
                             <h2 className="product-title">{product.attributes.Title}</h2>
                             <div className="product-price">{product.attributes.price}</div>
                             <img
@@ -26,8 +26,8 @@ export default function products() {
                                 alt={product.title} />
                             <div className="product-desc">{product.attributes.Desc}</div>
                         </div>
-
-                    </>
+                        </Fragment>
+                    
                 ))}
         </div>
     )
