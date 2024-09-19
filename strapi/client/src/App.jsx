@@ -1,15 +1,19 @@
 import Products from './components/Products'
-import './App.css'
 import Categories from './components/Categories'
+import StoreContect from './Hooks/storeContext'
+import './App.css'
+import { useEffect, useState } from 'react'
 
 function App() {
 
+  const [filter,setFilter] = useState("")
 
   return (
     <>
-      <Categories />
-      <Products></Products>
-
+      <StoreContect.Provider value={{filter,setFilter}}>
+        <Categories />
+        <Products />
+      </StoreContect.Provider>
     </>
   )
 }

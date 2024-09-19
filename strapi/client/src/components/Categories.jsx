@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react"
 import useFetch from "../Hooks/useFetch"
 import Checkbox from "./Checkbox"
+import './categories.css'
 
 export default function Categories() {
     const [categories, setCategories] = useState([])
