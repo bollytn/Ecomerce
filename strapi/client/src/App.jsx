@@ -3,6 +3,7 @@ import Categories from './components/Categories'
 import StoreContect from './Hooks/storeContext'
 import './App.css'
 import { useEffect, useState } from 'react'
+import Card from './components/Card'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <>
+    <Card/>
       <StoreContect.Provider value={
         {
           filter, setFilter,
