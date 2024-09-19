@@ -1,25 +1,38 @@
 import './checkbox.css'
 import qs from "qs"
 
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import StoreContect from '../Hooks/storeContext'
 export default function Checkbox({ categorie }) {
 
-    const { filter, setFilter } = useContext(StoreContect)
+    const { setFilter, selectedCategories, setSelectedCategorie } = useContext(StoreContect)
 
-    cinst [selectCategories, setSelectCategorie] = useState([])
-
-    const handleFilterCategories = (e) => {
-        const query  = qs.stringify({
+    useEffect(() => {
+        const query = qs.stringify({
             filters: {
                 categories: {
                     id: {
-                        $in:[1,1]
+                        $in: selectedCategories
                     }
                 }
             }
         })
-        setFilter("http://localhost:1337/api/products?populate=*&" + query)
+        setFilter(import.meta.env.VITE_API_URL + "/products?populate=*&" + query)
+    }, [selectedCategories])
+
+    const handleFilterCategories = (e) => {
+
+        const selectedID = e.target.dataset.categorie
+        const isChecked = e.target.checked
+        console.log(selectedID);
+        console.log(isChecked);
+
+        setSelectedCategorie(selectedCategories => {
+            if (isChecked) return [...selectedCategories, selectedID]
+            return selectedCategories.filter(id => id !== selectedID)
+        })
+
+
     }
 
     return (

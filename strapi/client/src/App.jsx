@@ -6,11 +6,17 @@ import { useEffect, useState } from 'react'
 
 function App() {
 
-  const [filter,setFilter] = useState("/products?populate=*")
+  const [filter, setFilter] = useState("/products?populate=*")
+  const [selectedCategories, setSelectedCategorie] = useState([])
 
   return (
     <>
-      <StoreContect.Provider value={{filter,setFilter}}>
+      <StoreContect.Provider value={
+        {
+          filter, setFilter,
+          selectedCategories, setSelectedCategorie,
+        }
+      }>
         <Categories />
         <Products />
       </StoreContect.Provider>
