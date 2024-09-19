@@ -1,11 +1,13 @@
 import './checkbox.css'
 import qs from "qs"
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import StoreContect from '../Hooks/storeContext'
 export default function Checkbox({ categorie }) {
 
     const { filter, setFilter } = useContext(StoreContect)
+
+    cinst [selectCategories, setSelectCategorie] = useState([])
 
     const handleFilterCategories = (e) => {
         const query  = qs.stringify({
