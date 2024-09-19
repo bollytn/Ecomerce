@@ -1,12 +1,23 @@
-import { useContext } from 'react'
 import './checkbox.css'
+import qs from "qs"
+
+import { useContext } from 'react'
 import StoreContect from '../Hooks/storeContext'
 export default function Checkbox({ categorie }) {
 
     const { filter, setFilter } = useContext(StoreContect)
 
     const handleFilterCategories = (e) => {
-        setFilter("http://localhost:1337/api/products?populate=*&filters[categories][id][$eq]=" + e.target.dataset.categorie)
+        const query  = qs.stringify({
+            filters: {
+                categories: {
+                    id: {
+                        $in:[1,1]
+                    }
+                }
+            }
+        })
+        setFilter("http://localhost:1337/api/products?populate=*&" + query)
     }
 
     return (
