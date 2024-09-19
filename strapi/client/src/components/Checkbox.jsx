@@ -24,8 +24,6 @@ export default function Checkbox({ categorie }) {
 
         const selectedID = e.target.dataset.categorie
         const isChecked = e.target.checked
-        console.log(selectedID);
-        console.log(isChecked);
 
         setSelectedCategorie(selectedCategories => {
             if (isChecked) return [...selectedCategories, selectedID]

@@ -10,13 +10,7 @@ export default function products() {
 
     useEffect(() => {
         data && setProducts(data)
-        console.log(products);
-        
     }, [data])
-
-    useEffect(() => {
-        console.log(filter);
-    }, [filter])
 
     return (
         <div className="products">

@@ -9,7 +9,6 @@ export default function Categories() {
 
     useEffect(() => {
         data && setCategories(data)
-        console.log(categories);
     }, [data])
 
     return (
