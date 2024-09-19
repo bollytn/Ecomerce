@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 function App() {
 
-  const [filter,setFilter] = useState("")
+  const [filter,setFilter] = useState("/products?populate=*")
 
   return (
     <>

@@ -6,7 +6,7 @@ export default function Checkbox({ categorie }) {
     const { filter, setFilter } = useContext(StoreContect)
 
     const handleFilterCategories = (e) => {
-        setFilter(e.target.dataset.categorie)
+        setFilter("http://localhost:1337/api/products?populate=*&filters[categories][id][$eq]=" + e.target.dataset.categorie)
     }
 
     return (

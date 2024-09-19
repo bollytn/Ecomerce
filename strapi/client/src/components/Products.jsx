@@ -5,23 +5,25 @@ import StoreContect from "../Hooks/storeContext"
 
 export default function products() {
     const [products, setProducts] = useState([])
-    const { data, loading, error } = useFetch("/products?populate=*")
-    const {filter} = useContext(StoreContect)
+    const { filter } = useContext(StoreContect)
+    const { data, loading, error } = useFetch(filter)
 
     useEffect(() => {
         data && setProducts(data)
+        console.log(products);
+        
     }, [data])
 
-    useEffect( ()=> {
+    useEffect(() => {
         console.log(filter);
-      },[filter])
+    }, [filter])
 
     return (
         <div className="products">
             {loading
                 ? "loading... "
                 : products.map(product => (
-                    <Fragment key={product.id}> 
+                    <Fragment key={product.id}>
                         <div className="product">
                             <h2 className="product-title">{product.attributes.Title}</h2>
                             <div className="product-price">{product.attributes.price}</div>
@@ -31,8 +33,8 @@ export default function products() {
                                 alt={product.title} />
                             <div className="product-desc">{product.attributes.Desc}</div>
                         </div>
-                        </Fragment>
-                    
+                    </Fragment>
+
                 ))}
         </div>
     )
