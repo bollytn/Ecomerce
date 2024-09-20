@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import './card.css'
 import { CiShoppingBasket } from "react-icons/ci";
+import { GrPowerReset } from "react-icons/gr";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromCart } from "../Redux/cartReducer"
+import { removeFromCart,resetCart } from "../Redux/cartReducer"
 
 export default function Card() {
   const [cartList, setCartList] = useState(false)
@@ -37,6 +38,7 @@ export default function Card() {
                 <span className='cart-item-remove'> <FaTrash /> </span>
               </li>
             ))}
+            <span className="cart-reset" onClick={() => dispatch(resetCart())}><GrPowerReset /></span>
           </ul>
         )
       }

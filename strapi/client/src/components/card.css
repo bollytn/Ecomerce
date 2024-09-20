@@ -68,3 +68,6 @@
   padding: 3px 7px;
   border-radius: 5px;
 }
+.cart-reset {
+  cursor: pointer;
+}
