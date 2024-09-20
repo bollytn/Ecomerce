@@ -1,33 +1,45 @@
+import { useState } from 'react';
 import './card.css'
 import { CiShoppingBasket } from "react-icons/ci";
+import { FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart } from "../Redux/cartReducer"
 
 export default function Card() {
+  const [cartList, setCartList] = useState(false)
+
+  const products = useSelector(state => state.cart.products)
+
+  const dispatch = useDispatch()
+
+  const handlecart = () => {
+    setCartList(!cartList)
+  }
+
   return (
     <div className="cart">
-      <div className="cart-icon"><CiShoppingBasket /></div>
-      <div className="cart-badge">5</div>
-      <ul className="cart-list">
-        <li className="cart-item">
-          <img src="http://localhost:1337/uploads/men_02_6574cf6348.jpg" alt="" className="cart-item-image" />
-          <span className="cart-item-title">Classic Sprint</span>
-          <span className="cart-item-price">120$</span>
-        </li>
-        <li className="cart-item">
-          <img src="http://localhost:1337/uploads/men_03_f9a87cf369.jpg" alt="" className="cart-item-image" />
-          <span className="cart-item-title">Classic Sprint</span>
-          <span className="cart-item-price">120$</span>
-        </li>
-        <li className="cart-item">
-          <img src="http://localhost:1337/uploads/women_01_c0b1a2b538.jpg" alt="" className="cart-item-image" />
-          <span className="cart-item-title">Classic Sprint</span>
-          <span className="cart-item-price">120$</span>
-        </li>
-        <li className="cart-item">
-          <img src="http://localhost:1337/uploads/women_02_652a34c8e5.jpg" alt="" className="cart-item-image" />
-          <span className="cart-item-title">Classic Sprint</span>
-          <span className="cart-item-price">120$</span>
-        </li>
-      </ul>
+      <div className="cart-icon" onClick={products.length > 0 ? handlecart : undefined}><CiShoppingBasket /></div>
+      <div className="cart-badge">{products.length}</div>
+      {
+        cartList || products.length > 0 &&
+        (
+          <ul className="cart-list">
+            {products.map(product => (
+              <li className="cart-item"
+                key={product.id}
+                onClick={() => dispatch(removeFromCart({
+                  id: product.id,
+                }))}
+              >
+                <img className="cart-item-image" src={product.image} alt={product.title} />
+                <span className="cart-item-title">{product.title}</span>
+                <span className="cart-item-price">{product.price}</span>
+                <span className='cart-item-remove'> <FaTrash /> </span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
     </div>
   )
 }

@@ -40,3 +40,7 @@
 .product-image:hover + .product-desc {
   bottom: 0;
 }
+
+.product-btn {
+  display: block;
+}
